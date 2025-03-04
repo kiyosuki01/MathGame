@@ -52,9 +52,6 @@ namespace MathGame
                         Console.WriteLine("Invalid input. Try again.");
                         break;
                 }
-
-                Console.WriteLine("Press any key to continue");
-                Console.ReadKey();
             }
         }
     }

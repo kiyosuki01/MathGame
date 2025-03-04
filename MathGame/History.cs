@@ -11,6 +11,7 @@
 
         public static void ShowHistory()
         {
+            Console.Clear();
             Console.WriteLine("--- Game History ---");
             if (gameHistory.Count == 0)
             {
@@ -22,6 +23,9 @@
                 {
                     Console.WriteLine(gameResult);
                 }
+
+                Console.WriteLine("Press any key to continue");
+                Console.ReadKey();
             }
         }
     }
