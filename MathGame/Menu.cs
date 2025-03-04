@@ -4,7 +4,7 @@ namespace MathGame
 {
     class Menu
     {
-        internal static void Show()
+        public static void Show()
         {
             while (true)
             {
@@ -16,38 +16,36 @@ namespace MathGame
                 Console.WriteLine("4. Division");
                 Console.WriteLine("5. Random Game");
                 Console.WriteLine("6. Game History");
-                Console.WriteLine("7. Exit");
-
+                Console.WriteLine("7. Change Difficulty");
+                Console.WriteLine("8. Exit");
                 Console.Write("Enter an option: ");
-                string? choice = Console.ReadLine();
 
-                Console.WriteLine("--- Game Difficulty ---");
-                Console.WriteLine("1. Easy");
-                Console.WriteLine("2. Medium");
-                Console.WriteLine("3. Hard");
-                int level = Utils.GetInteger("Your choice: ", 1, 3);
+                string? choice = Console.ReadLine();
 
                 switch (choice)
                 {
                     case "1":
-                        Game.StartGame("+", level);
+                        Game.StartGame("+", Utils.GetSelectedLevel());
                         break;
                     case "2":
-                        Game.StartGame("-", level);
+                        Game.StartGame("-", Utils.GetSelectedLevel());
                         break;
                     case "3":
-                        Game.StartGame("*", level);
+                        Game.StartGame("*", Utils.GetSelectedLevel());
                         break;
                     case "4":
-                        Game.StartGame("/", level);
+                        Game.StartGame("/", Utils.GetSelectedLevel());
                         break;
                     case "5":
-                        Game.StartGame("random", level);
+                        Game.StartGame("random", Utils.GetSelectedLevel());
                         break;
                     case "6":
                         History.ShowHistory();
                         break;
                     case "7":
+                        Utils.ChangeDifficulty();
+                        break;
+                    case "8":
                         Console.WriteLine("Goodbye!");
                         return;
                     default:
