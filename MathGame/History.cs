@@ -1,0 +1,6 @@
+﻿namespace MathGame
+{
+    class History
+    {
+    }
+}
