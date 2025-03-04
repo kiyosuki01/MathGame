@@ -1,4 +1,6 @@
-﻿namespace MathGame
+﻿using MathGame;
+
+namespace MathGame
 {
     class Menu
     {
@@ -21,19 +23,26 @@
                 switch (choice)
                 {
                     case "1":
+                        Game.StartGame("+");
                         break;
                     case "2":
+                        Game.StartGame("-");
                         break;
-                    case "3:
+                    case "3":
+                        Game.StartGame("*");
                         break;
                     case "4":
+                        Game.StartGame("/");
                         break;
                     case "5":
+                        Game.StartGame("random");
                         break;
                     case "6":
+                        History.ShowHistory();
                         break;
                     case "7":
-                        break;
+                        Console.WriteLine("Goodbye!");
+                        return;
                     default:
                         Console.WriteLine("Invalid input. Try again.");
                         break;
