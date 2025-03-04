@@ -1,0 +1,7 @@
+﻿namespace MathGame
+{
+    class Game
+    {
+
+    }
+}
