@@ -9,7 +9,7 @@
             gameHistory.Add(result);
         }
 
-        public void ShowHistory()
+        public static void ShowHistory()
         {
             Console.WriteLine("--- Game History ---");
             if (gameHistory.Count == 0)
