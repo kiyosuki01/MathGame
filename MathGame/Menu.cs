@@ -18,6 +18,7 @@ namespace MathGame
                 Console.WriteLine("6. Game History");
                 Console.WriteLine("7. Exit");
 
+                Console.Write("Enter an option: ");
                 string? choice = Console.ReadLine();
 
                 switch (choice)
