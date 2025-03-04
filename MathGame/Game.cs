@@ -11,8 +11,10 @@ namespace MathGame
             Stopwatch timer = new Stopwatch();
             timer.Start();
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 1; i < 6; i++)
             {
+                Console.Clear();
+
                 (int num1, int num2, int correctAnswer, string question) = GenerateQuestion(operation, random);
 
                 Console.WriteLine($"Question {i}: {question}");
@@ -28,13 +30,15 @@ namespace MathGame
                     Console.WriteLine($"Incorrect. The correct answer was: {correctAnswer}");
                 }
 
-                timer.Stop();
-                TimeSpan elapsedTime = timer.Elapsed;
-                string result = $"Game: {operation} | Score: {score}/5 | Time: {elapsedTime.Seconds} sec.";
-                History.AddResult(result);
-
-                Console.WriteLine(result);
+                Console.WriteLine("Press any key to continue");
+                Console.ReadKey();
             }
+
+            timer.Stop();
+            TimeSpan elapsedTime = timer.Elapsed;
+
+            string result = $"Game: {operation} | Score: {score}/5 | Time: {elapsedTime.Seconds} sec.";
+            History.AddResult(result);
         }
 
         private static (int, int, int, string) GenerateQuestion(string operation, Random random)
