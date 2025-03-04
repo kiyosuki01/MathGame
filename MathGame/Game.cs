@@ -76,7 +76,7 @@ namespace MathGame
             {
                 num1 = random.Next(min, max);
                 num2 = random.Next(min, max);
-            } while (operation == "/" && num1 != 0 && num1 % num2 != 0);
+            } while (operation == "/" && num2 != 0 && num1 % num2 != 0);
 
             switch (operation)
             {
