@@ -4,18 +4,18 @@ namespace MathGame
 {
     class Game
     {
-        public static void StartGame(string operation)
+        public static void StartGame(string operation, int level)
         {
             Random random = new Random();
             int score = 0;
             Stopwatch timer = new Stopwatch();
             timer.Start();
 
-            for (int i = 1; i < 6; i++)
+            for (int i = 1; i <= 5; i++)
             {
                 Console.Clear();
 
-                (int num1, int num2, int correctAnswer, string question) = GenerateQuestion(operation, random);
+                (int num1, int num2, int correctAnswer, string question) = GenerateQuestion(operation, level, random);
 
                 Console.WriteLine($"Question {i}: {question}");
                 int userAnswer = Utils.GetInteger("Your answer: ");
@@ -41,8 +41,28 @@ namespace MathGame
             History.AddResult(result);
         }
 
-        private static (int, int, int, string) GenerateQuestion(string operation, Random random)
+        private static (int, int, int, string) GenerateQuestion(string operation, int level, Random random)
         {
+            int min, max;
+
+            switch (level)
+            {
+                case 1:
+                    min = 0;
+                    max = 10;
+                    break;
+                case 2:
+                    min = 10;
+                    max = 100;
+                    break;
+                case 3:
+                    min = 100;
+                    max = 1000;
+                    break;
+                default:
+                    throw new Exception("Incorrect difficulty level");
+            }
+
             int num1, num2, correctAnswer;
             string question;
 
@@ -54,9 +74,9 @@ namespace MathGame
 
             do
             {
-                num1 = random.Next(0, 101);
-                num2 = random.Next(1, 101);
-            } while (operation == "/" && num1 % num2 != 0);
+                num1 = random.Next(min, max);
+                num2 = random.Next(min, max);
+            } while (operation == "/" && num1 != 0 && num1 % num2 != 0);
 
             switch (operation)
             {

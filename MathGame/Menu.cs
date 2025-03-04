@@ -21,22 +21,28 @@ namespace MathGame
                 Console.Write("Enter an option: ");
                 string? choice = Console.ReadLine();
 
+                Console.WriteLine("--- Game Difficulty ---");
+                Console.WriteLine("1. Easy");
+                Console.WriteLine("2. Medium");
+                Console.WriteLine("3. Hard");
+                int level = Utils.GetInteger("Your choice: ", 1, 3);
+
                 switch (choice)
                 {
                     case "1":
-                        Game.StartGame("+");
+                        Game.StartGame("+", level);
                         break;
                     case "2":
-                        Game.StartGame("-");
+                        Game.StartGame("-", level);
                         break;
                     case "3":
-                        Game.StartGame("*");
+                        Game.StartGame("*", level);
                         break;
                     case "4":
-                        Game.StartGame("/");
+                        Game.StartGame("/", level);
                         break;
                     case "5":
-                        Game.StartGame("random");
+                        Game.StartGame("random", level);
                         break;
                     case "6":
                         History.ShowHistory();
