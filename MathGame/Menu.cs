@@ -1,6 +1,4 @@
-﻿using MathGame;
-
-namespace MathGame
+﻿namespace MathGame
 {
     class Menu
     {
@@ -18,6 +16,7 @@ namespace MathGame
                 Console.WriteLine("6. Game History");
                 Console.WriteLine("7. Change Difficulty");
                 Console.WriteLine("8. Exit");
+                Console.WriteLine("-----------------");
                 Console.Write("Enter an option: ");
 
                 string? choice = Console.ReadLine();

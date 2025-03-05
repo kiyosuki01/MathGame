@@ -12,19 +12,23 @@
         public static void ShowHistory()
         {
             Console.Clear();
-            Console.WriteLine("--- Game History ---");
+            
             if (gameHistory.Count == 0)
             {
                 Console.WriteLine("Game History is empty.");
             }
             else
             {
+                Console.WriteLine("--- Game History ---\n");
+
                 foreach (string gameResult in gameHistory)
                 {
                     Console.WriteLine(gameResult);
                 }
 
-                Console.WriteLine("Press any key to continue");
+                Console.WriteLine("\n--------------------");
+
+                Console.WriteLine("\nPress any key to continue");
                 Console.ReadKey();
             }
         }
