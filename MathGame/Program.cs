@@ -1,6 +1,7 @@
 ﻿class Program
 {
     static List<string> gameHistory = new List<string>();
+    static Difficulty currentDifficulty = Difficulty.Easy;
 
     static void Main()
     {
@@ -21,6 +22,7 @@
             Console.WriteLine("4. Division");
             Console.WriteLine("5. Random");
             Console.WriteLine("6. Show Game History");
+            Console.WriteLine("7. Change Difficulty");
             Console.WriteLine("-----------------");
             Console.Write("Your choice: ");
 
@@ -47,6 +49,9 @@
                     break;
                 case "6":
                     ShowGameHistory();
+                    break;
+                case "7":
+                    ChangeDifficulty();
                     break;
                 default:
                     break;
@@ -75,15 +80,39 @@
 
             if (currentOperation == "/")
             {
-                result = random.Next(1, 11);
+                result = currentDifficulty switch
+                {
+                    Difficulty.Easy => random.Next(1, 11),
+                    Difficulty.Normal => random.Next(1, 101),
+                    Difficulty.Hard => random.Next(1, 1001),
+                    _ => throw new NotImplementedException(),
+                };
 
-                b = random.Next(1, 11);
+                b = currentDifficulty switch
+                {
+                    Difficulty.Easy => random.Next(1, 11),
+                    Difficulty.Normal => random.Next(1, 101),
+                    Difficulty.Hard => random.Next(1, 1001),
+                    _ => throw new NotImplementedException(),
+                };
                 a = b * result;
             }
             else
             {
-                a = random.Next(0, 11);
-                b = random.Next(0, 11);
+                a = currentDifficulty switch
+                {
+                    Difficulty.Easy => random.Next(1, 11),
+                    Difficulty.Normal => random.Next(1, 101),
+                    Difficulty.Hard => random.Next(1, 1001),
+                    _ => throw new NotImplementedException(),
+                };
+                b = currentDifficulty switch
+                {
+                    Difficulty.Easy => random.Next(1, 11),
+                    Difficulty.Normal => random.Next(1, 101),
+                    Difficulty.Hard => random.Next(1, 1001),
+                    _ => throw new NotImplementedException(),
+                };
 
                 result = currentOperation switch
                 {
@@ -140,5 +169,42 @@
 
             Console.ReadKey();
         }
+    }
+
+    static void ChangeDifficulty()
+    {
+        while (true)
+        {
+            Console.Clear();
+
+            Console.WriteLine($"Change Difficulty (current: {currentDifficulty})");
+            Console.WriteLine("1. Easy");
+            Console.WriteLine("2. Normal");
+            Console.WriteLine("3. Hard");
+            Console.Write("Your choice: ");
+            string? userChoice = Console.ReadLine();
+
+            switch (userChoice)
+            {
+                case "1": 
+                    currentDifficulty = Difficulty.Easy;
+                    return;
+                case "2": 
+                    currentDifficulty = Difficulty.Normal;
+                    return;
+                case "3": 
+                    currentDifficulty = Difficulty.Hard;
+                    return;
+                default:
+                    break;
+            }
+        }
+    }
+
+    enum Difficulty
+    {
+        Easy,
+        Normal,
+        Hard
     }
 }
