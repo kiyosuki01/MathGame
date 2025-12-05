@@ -26,3 +26,7 @@ Console-based math game written in C#.
 - Choose operation from main menu
 - Input answers using keyboard
 - Navigate menu using number keys
+
+## License
+
+MIT License. See [LICENSE](https://github.com/kiyosuki01/MathGame/blob/main/LICENSE) for details.
