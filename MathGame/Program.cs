@@ -1,5 +1,7 @@
 ﻿class Program
 {
+    static List<string> gameHistory = new List<string>();
+
     static void Main()
     {
         MainMenu();
@@ -17,6 +19,8 @@
             Console.WriteLine("2. Subtraction");
             Console.WriteLine("3. Multiplication");
             Console.WriteLine("4. Division");
+            Console.WriteLine("5. Random");
+            Console.WriteLine("6. Show Game History");
             Console.WriteLine("-----------------");
             Console.Write("Your choice: ");
 
@@ -37,6 +41,12 @@
                     break;
                 case "4":
                     Gameplay("/");
+                    break;
+                case "5":
+                    Gameplay("~");
+                    break;
+                case "6":
+                    ShowGameHistory();
                     break;
                 default:
                     break;
@@ -99,6 +109,30 @@
                 Console.WriteLine($"You are wrong. Correct answer: {result}");
                 Console.ReadKey();
             }
+        }
+
+        gameHistory.Add($"Operation: {operation} | Score: {score}");
+    }
+
+    static void ShowGameHistory()
+    {
+        if (gameHistory.Count == 0)
+        {
+            Console.WriteLine("Game History is empty.");
+            Console.ReadKey();
+        }
+        else
+        {
+            Console.Clear();
+            
+            Console.WriteLine("--- Game History ---");
+
+            for (int i = 0; i < gameHistory.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {gameHistory[i]}");
+            }
+
+            Console.ReadKey();
         }
     }
 }
