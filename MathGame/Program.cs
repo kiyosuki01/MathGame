@@ -63,11 +63,17 @@
         {
             Console.Clear();
 
-            int result = 0;
-            int a = 0;
-            int b = 0;
+            string currentOperation = operation;
 
-            if (operation == "/")
+            int a = 0, b = 0, result = 0;
+
+            if (operation == "~")
+            {
+                string[] operations = { "+", "-", "*", "/" };
+                currentOperation = operations[random.Next(4)];
+            }
+
+            if (currentOperation == "/")
             {
                 result = random.Next(1, 11);
 
@@ -79,7 +85,7 @@
                 a = random.Next(0, 11);
                 b = random.Next(0, 11);
 
-                result = operation switch
+                result = currentOperation switch
                 {
                     "+" => a + b,
                     "-" => a - b,
@@ -88,7 +94,7 @@
                 };
             }
 
-            Console.Write($"{i + 1}. {a} {operation} {b}: ");
+            Console.Write($"{i + 1}. {a} {currentOperation} {b}: ");
             string? input = Console.ReadLine();
             int userAnswer = 0;
 
@@ -124,7 +130,7 @@
         else
         {
             Console.Clear();
-            
+
             Console.WriteLine("--- Game History ---");
 
             for (int i = 0; i < gameHistory.Count; i++)
