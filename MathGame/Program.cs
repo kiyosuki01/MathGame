@@ -4,6 +4,8 @@ class Program
 {
     static List<string> gameHistory = new List<string>();
     static Difficulty currentDifficulty = Difficulty.Easy;
+    static Random random = new();
+    static readonly string[] operations = { "+", "-", "*", "/" };
 
     static void Main()
     {
@@ -63,7 +65,6 @@ class Program
 
     static void Gameplay(string operation)
     {
-        Random random = new();
         int score = 0;
         Stopwatch stopwatch = new();
 
@@ -79,45 +80,19 @@ class Program
 
             if (operation == "~")
             {
-                string[] operations = { "+", "-", "*", "/" };
-                currentOperation = operations[random.Next(4)];
+                currentOperation = GetRandomOperation();
             }
 
             if (currentOperation == "/")
             {
-                result = currentDifficulty switch
-                {
-                    Difficulty.Easy => random.Next(1, 11),
-                    Difficulty.Normal => random.Next(1, 101),
-                    Difficulty.Hard => random.Next(1, 1001),
-                    _ => throw new NotImplementedException(),
-                };
-
-                b = currentDifficulty switch
-                {
-                    Difficulty.Easy => random.Next(1, 11),
-                    Difficulty.Normal => random.Next(1, 101),
-                    Difficulty.Hard => random.Next(1, 1001),
-                    _ => throw new NotImplementedException(),
-                };
+                result = GetRandomNumberByDifficulty();
+                b = GetRandomNumberByDifficulty();
                 a = b * result;
             }
             else
             {
-                a = currentDifficulty switch
-                {
-                    Difficulty.Easy => random.Next(1, 11),
-                    Difficulty.Normal => random.Next(1, 101),
-                    Difficulty.Hard => random.Next(1, 1001),
-                    _ => throw new NotImplementedException(),
-                };
-                b = currentDifficulty switch
-                {
-                    Difficulty.Easy => random.Next(1, 11),
-                    Difficulty.Normal => random.Next(1, 101),
-                    Difficulty.Hard => random.Next(1, 1001),
-                    _ => throw new NotImplementedException(),
-                };
+                a = GetRandomNumberByDifficulty();
+                b = GetRandomNumberByDifficulty();
 
                 result = currentOperation switch
                 {
@@ -129,14 +104,7 @@ class Program
             }
 
             Console.Write($"{i + 1}. {a} {currentOperation} {b}: ");
-            string? input = Console.ReadLine();
-            int userAnswer = 0;
-
-            while (!int.TryParse(input, out userAnswer))
-            {
-                Console.Write("Invalid input. Try again: ");
-                input = Console.ReadLine();
-            }
+            int userAnswer = GetUserInteger();
 
             if (userAnswer == result)
             {
@@ -153,29 +121,27 @@ class Program
 
         stopwatch.Stop();
 
-        gameHistory.Add($"Operation: {operation} | Score: {score} | Time: {stopwatch.Elapsed.TotalSeconds:F1}s");
+        AddToGameHistory(operation, score, stopwatch);
     }
 
     static void ShowGameHistory()
     {
+        Console.Clear();
+        Console.WriteLine("--- Game History ---");
+
         if (gameHistory.Count == 0)
         {
             Console.WriteLine("Game History is empty.");
-            Console.ReadKey();
         }
         else
         {
-            Console.Clear();
-
-            Console.WriteLine("--- Game History ---");
-
             for (int i = 0; i < gameHistory.Count; i++)
             {
                 Console.WriteLine($"{i + 1}. {gameHistory[i]}");
             }
-
-            Console.ReadKey();
         }
+
+        Console.ReadKey();
     }
 
     static void ChangeDifficulty()
@@ -206,6 +172,41 @@ class Program
                     break;
             }
         }
+    }
+
+    static int GetRandomNumberByDifficulty()
+    {
+        return currentDifficulty switch
+        {
+            Difficulty.Easy => random.Next(1, 11),
+            Difficulty.Normal => random.Next(1, 101),
+            Difficulty.Hard => random.Next(1, 1001),
+            _ => throw new NotImplementedException(),
+        };
+    }
+
+    static string GetRandomOperation()
+    {
+        return operations[random.Next(operations.Length)];
+    }
+
+    static int GetUserInteger()
+    {
+        string? input = Console.ReadLine();
+        int result = 0;
+
+        while (!int.TryParse(input, out result))
+        {
+            Console.Write("Invalid input. Try again: ");
+            input = Console.ReadLine();
+        }
+
+        return result;
+    }
+
+    static void AddToGameHistory(string operation, int score, Stopwatch stopwatch)
+    {
+        gameHistory.Add($"Operation: {operation} | Score: {score} | Time: {stopwatch.Elapsed.TotalSeconds:F1}s");
     }
 
     enum Difficulty
