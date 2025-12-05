@@ -9,6 +9,8 @@
     {
         while (true)
         {
+            Console.Clear();
+
             Console.WriteLine("--- Math Game ---");
             Console.WriteLine("0. Exit");
             Console.WriteLine("1. Addition");
@@ -49,6 +51,8 @@
 
         for (int i = 0; i < 5; i++)
         {
+            Console.Clear();
+
             int result = 0;
             int a = 0;
             int b = 0;
@@ -74,7 +78,7 @@
                 };
             }
 
-            Console.Write($"{i}. {a} {operation} {b}: ");
+            Console.Write($"{i + 1}. {a} {operation} {b}: ");
             string? input = Console.ReadLine();
             int userAnswer = 0;
 
