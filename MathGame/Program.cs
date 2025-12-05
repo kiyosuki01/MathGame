@@ -1,4 +1,6 @@
-﻿class Program
+﻿using System.Diagnostics;
+
+class Program
 {
     static List<string> gameHistory = new List<string>();
     static Difficulty currentDifficulty = Difficulty.Easy;
@@ -63,6 +65,9 @@
     {
         Random random = new();
         int score = 0;
+        Stopwatch stopwatch = new();
+
+        stopwatch.Start();
 
         for (int i = 0; i < 5; i++)
         {
@@ -146,7 +151,9 @@
             }
         }
 
-        gameHistory.Add($"Operation: {operation} | Score: {score}");
+        stopwatch.Stop();
+
+        gameHistory.Add($"Operation: {operation} | Score: {score} | Time: {stopwatch.Elapsed.TotalSeconds:F1}s");
     }
 
     static void ShowGameHistory()
@@ -186,13 +193,13 @@
 
             switch (userChoice)
             {
-                case "1": 
+                case "1":
                     currentDifficulty = Difficulty.Easy;
                     return;
-                case "2": 
+                case "2":
                     currentDifficulty = Difficulty.Normal;
                     return;
-                case "3": 
+                case "3":
                     currentDifficulty = Difficulty.Hard;
                     return;
                 default:
